@@ -1,0 +1,49 @@
+server:
+  port: 8080
+
+spring:
+  main:
+    web-application-type: reactive
+  kafka:
+    consumer:
+      bootstrap-servers: localhost:9092
+      group-id: entity-state
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+
+  r2dbc:
+    url: r2dbc:oracle://SYSTEM:MiPasswordSegura123@localhost:1521/?oracle.service=XE
+    username: SYSTEM
+    password: MiPasswordSegura123
+    initialization-mode: always
+  application:
+    name: gateway
+  cloud:
+    config:
+      enabled: false
+    stream:
+      kafka:
+        binder:
+          brokers: localhost:9092
+          defaultBrokerPort: 9092
+          autoCreateTopics: true
+          defaultReplicationFactor: 1
+          defaultPartitionCount: 1
+          consumer-properties:
+            value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+            key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+        consumer:
+          properties:
+            spring.json.trusted.packages: "*"
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+    register-with-eureka: true
+    fetch-registry: true
+
+logging:
+  level:
+    org.springframework.kafka.support.serializer: DEBUG

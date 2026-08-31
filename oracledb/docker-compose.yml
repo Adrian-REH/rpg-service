@@ -1,0 +1,9 @@
+services:
+  oracle-xe:
+    image: gvenzl/oracle-xe:21-slim
+    container_name: oracle-xe
+    ports:
+      - "1521:1521"  # Listener de Oracle
+      - "5500:5500"  # Enterprise Manager Express
+    environment:
+      ORACLE_PASSWORD: MiPasswordSegura123

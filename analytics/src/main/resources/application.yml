@@ -1,0 +1,29 @@
+server:
+  port: 8081
+
+spring:
+  r2dbc:
+    url: r2dbc:oracle://SYSTEM:MiPasswordSegura123@localhost:1521/?oracle.service=XE
+    username: SYSTEM
+    password: MiPasswordSegura123
+    initialization-mode: always
+  security:
+    user:
+      name: admin
+      password: secret123
+  application:
+    name: analytics
+  cloud:
+    config:
+      enabled: false
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+    register-with-eureka: true
+    fetch-registry: true
+
+logging:
+  level:
+    org.springframework.kafka.support.serializer: DEBUG
